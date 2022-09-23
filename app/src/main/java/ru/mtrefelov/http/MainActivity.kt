@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val task = LogResponseRunnable(url)
+        val task = LogHttpResponseRunnable(url)
         val buttonFetch: Button = findViewById(R.id.button_http)
         buttonFetch.setOnClickListener {
             Thread(task).start()
