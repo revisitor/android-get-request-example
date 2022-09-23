@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">InternetTest</string>
     <string name="button_http">Get via HTTP</string>
+    <string name="button_okhttp">Get via OkHTTP</string>
 </resources>

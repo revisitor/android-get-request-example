@@ -17,10 +17,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val task = LogHttpResponseRunnable(url)
-        val buttonFetch: Button = findViewById(R.id.button_http)
-        buttonFetch.setOnClickListener {
-            Thread(task).start()
+        val httpTask = LogHttpResponseRunnable(url)
+        val buttonFetchHttp: Button = findViewById(R.id.button_http)
+        buttonFetchHttp.setOnClickListener {
+            Thread(httpTask).start()
+        }
+
+        val okHttpTask = LogOkHttpResponse(url)
+        val buttonFetchOkHttp: Button = findViewById(R.id.button_okhttp)
+        buttonFetchOkHttp.setOnClickListener {
+            okHttpTask.run()
         }
     }
 }
