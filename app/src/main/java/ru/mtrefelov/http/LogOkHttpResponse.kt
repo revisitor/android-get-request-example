@@ -8,7 +8,9 @@ class LogOkHttpResponse(url: String) {
     private val client = OkHttpClient()
     private val request = Request.Builder().url(url).build()
 
-    fun run() = client.newCall(request).enqueue(object : Callback {
+    fun run() = client.newCall(request).enqueue(ResponseCallback)
+
+    private object ResponseCallback : Callback {
         override fun onResponse(call: Call, response: Response) {
             val responseBody = response.body?.string() ?: ""
             Log.i("Flickr OkCats", responseBody)
@@ -17,5 +19,5 @@ class LogOkHttpResponse(url: String) {
         override fun onFailure(call: Call, e: IOException) {
             Log.e("LogOkHttpResponse", e.stackTraceToString())
         }
-    })
+    }
 }
