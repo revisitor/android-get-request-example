@@ -12,8 +12,9 @@ class LogOkHttpResponse(url: String) {
 
     private object ResponseCallback : Callback {
         override fun onResponse(call: Call, response: Response) {
-            val responseBody = response.body?.string() ?: ""
-            Log.i("Flickr OkCats", responseBody)
+            response.body?.use {
+                Log.i("Flickr OkCats", it.string())
+            }
         }
 
         override fun onFailure(call: Call, e: IOException) {
