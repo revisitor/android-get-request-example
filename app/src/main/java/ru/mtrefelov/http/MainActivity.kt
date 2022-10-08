@@ -15,25 +15,28 @@ class MainActivity : AppCompatActivity() {
 
     private val httpRequestsExecutor: ExecutorService = Executors.newCachedThreadPool()
 
+    private lateinit var httpFetchButton: Button
+    private lateinit var okHttpFetchButton: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val httpTask = LogHttpResponseRunnable(url)
-        val buttonFetchHttp: Button = findViewById(R.id.button_http)
-        buttonFetchHttp.setOnClickListener {
+        httpFetchButton = findViewById(R.id.button_http)
+        httpFetchButton.setOnClickListener {
             httpRequestsExecutor.execute(httpTask)
         }
 
         val okHttpTask = LogOkHttpResponse(url)
-        val buttonFetchOkHttp: Button = findViewById(R.id.button_okhttp)
-        buttonFetchOkHttp.setOnClickListener {
+        okHttpFetchButton = findViewById(R.id.button_okhttp)
+        okHttpFetchButton.setOnClickListener {
             okHttpTask.run()
         }
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         httpRequestsExecutor.shutdown()
+        super.onDestroy()
     }
 }
